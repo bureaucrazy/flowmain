@@ -12,11 +12,11 @@ module Api
       end
 
       def sensor_notification
-        respond_with Notification.where("sensor_id = ?", params[:sensor_id])
+        respond_with Notification.where("sensor_id = ?", params[:id])
       end
 
       def sensor_status
-        respond_with Notification.where("sensor_id = ?", params[:sensor_id]).last
+        respond_with Notification.where("sensor_id = ?", params[:id]).last
       end
 
     end
