@@ -2,7 +2,7 @@ class CreateSites < ActiveRecord::Migration
   def change
     create_table :sites do |t|
       t.string :name
-      t.float :long
+      t.float :lon
       t.float :lat
       t.string :description
       t.integer :client_id

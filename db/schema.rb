@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20151119004003) do
 
   create_table "sites", force: :cascade do |t|
     t.string   "name"
-    t.float    "long"
+    t.float    "lon"
     t.float    "lat"
     t.string   "description"
     t.integer  "client_id"

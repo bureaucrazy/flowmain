@@ -13,12 +13,12 @@ CREATED_AT = Time.now
 CLIENT_ID = 1
 SITE_ARY_NAME  = ['Lynn Creek', 'Seymour River', 'Cleveland Dam', 'Capilano River']
 SITE_ARY_LAT   = [49.3452601, 49.346578, 49.3602866, 49.327318]
-SITE_ARY_LONG  = [-123.0312098, -123.00334, -123.111918, -123.131257]
+SITE_ARY_LON  = [-123.0312098, -123.00334, -123.111918, -123.131257]
 
 for ary_ctr in 0...SITE_ARY_NAME.count
   Site.create({name: SITE_ARY_NAME[ary_ctr],
                lat:  SITE_ARY_LAT[ary_ctr],
-               long: SITE_ARY_LONG[ary_ctr],
+               lon: SITE_ARY_LON[ary_ctr],
                client_id: CLIENT_ID,
                created_at: CREATED_AT})
 end

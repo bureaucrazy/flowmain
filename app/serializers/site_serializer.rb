@@ -1,5 +1,5 @@
 class SiteSerializer < ActiveModel::Serializer
-  attributes :id, :name, :current_site_status, :current_site_status_categorized, :long, :lat, :description, :url
+  attributes :id, :name, :current_site_status, :current_site_status_categorized, :lon, :lat, :description, :url
 
   has_many :sensors
   # has_many :scadas, through: :sensors
