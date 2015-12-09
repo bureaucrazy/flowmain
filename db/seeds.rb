@@ -11,14 +11,14 @@ CREATED_AT = Time.now
 # Site table
 # -----------------------------------------------------------------------
 CLIENT_ID = 1
-SITE_ARY_NAME  = ['Lynn Creek', 'Seymour River', 'Cleveland Dam', 'Capilano River']
-SITE_ARY_LAT   = [49.3452601, 49.346578, 49.3602866, 49.327318]
-SITE_ARY_LON  = [-123.0312098, -123.00334, -123.111918, -123.131257]
+SITE_ARY_NAME  = ['Lynn Creek', 'Seymour River', 'Cleveland Dam', 'Capilano River', 'Fraser River']
+SITE_ARY_LAT   = [49.3452601, 49.346578, 49.3602866, 49.327318, 49.177778]
+SITE_ARY_LON  = [-123.0312098, -123.00334, -123.111918, -123.131257, -123.2125]
 
-for ary_ctr in 0...SITE_ARY_NAME.count
-  Site.create({name: SITE_ARY_NAME[ary_ctr],
-               lat:  SITE_ARY_LAT[ary_ctr],
-               lon: SITE_ARY_LON[ary_ctr],
+for site_ary_ctr in 0...SITE_ARY_NAME.count
+  Site.create({name: SITE_ARY_NAME[site_ary_ctr],
+               lat:  SITE_ARY_LAT[site_ary_ctr],
+               lon: SITE_ARY_LON[site_ary_ctr],
                client_id: CLIENT_ID,
                created_at: CREATED_AT})
 end
@@ -32,16 +32,17 @@ SENSOR_ARY_TYPE = [1, 2, 3, 4]
 SENSOR_ARY_DESCRIPTION = ['m3/s', 'Celcius', 'Gallons/second', 'Meters']
 SENSOR_ARY_WARNING = [300, 21, 21, 50]
 SENSOR_ARY_DANGER = [400, 32, 32, 75]
-SENSOR_ARY_SITE_ID = [1, 2, 3, 4]
 
-for ary_ctr in 0...SENSOR_ARY_NAME.count
-  Sensor.create({name: SENSOR_ARY_NAME[ary_ctr],
-                 sensor_type: SENSOR_ARY_TYPE[ary_ctr],
-                 description: SENSOR_ARY_DESCRIPTION[ary_ctr],
-                 warning_threshold: SENSOR_ARY_WARNING[ary_ctr],
-                 danger_threshold: SENSOR_ARY_DANGER[ary_ctr],
-                 site_id: SENSOR_ARY_SITE_ID[ary_ctr],
-                 created_at: CREATED_AT})
+for site_ary_ctr in 1..SITE_ARY_NAME.count
+  for sensor_ary_ctr in 0...SENSOR_ARY_NAME.count
+    Sensor.create({name: SENSOR_ARY_NAME[sensor_ary_ctr],
+                   sensor_type: SENSOR_ARY_TYPE[sensor_ary_ctr],
+                   description: SENSOR_ARY_DESCRIPTION[sensor_ary_ctr],
+                   warning_threshold: SENSOR_ARY_WARNING[sensor_ary_ctr],
+                   danger_threshold: SENSOR_ARY_DANGER[sensor_ary_ctr],
+                   site_id: site_ary_ctr,
+                   created_at: CREATED_AT})
+  end
 end
 # -----------------------------------------------------------------------
 
@@ -57,17 +58,17 @@ LEVEL       = 4
 for sensor_id in 1..Sensor.count
   sensor            = Sensor.find(sensor_id)
   sensor_type       = sensor.sensor_type
-  liquid_start      = rand(150..180)
-  liquid_peak       = rand(350..400)
-  liquid_end        = rand(200..250)
-  temperature_start = rand(4..7)
-  temperature_peak  = rand(10..15)
-  temperature_end   = rand(7..10)
-  flow_start        = rand(2..5)
-  flow_peak         = rand(5..10)
-  flow_end          = rand(5..10)
+  liquid_start      = rand(150..200)
+  liquid_peak       = rand(290..450)
+  liquid_end        = rand(150..290)
+  temperature_start = rand(4..10)
+  temperature_peak  = rand(10..25)
+  temperature_end   = rand(4..10)
+  flow_start        = rand(2..10)
+  flow_peak         = rand(10..25)
+  flow_end          = rand(2..10)
   level_start       = rand(15..20)
-  level_peak        = rand(20..30)
+  level_peak        = rand(20..80)
   level_end         = rand(15..20)
 
   # Scada level loop
@@ -111,7 +112,7 @@ for sensor_id in 1..Sensor.count
 
     Scada.create({sensor_id:  sensor_id,
                   value:      value,
-                  ts_Data:    starting_date_as_ctr,
+                  ts_data:    starting_date_as_ctr,
                   created_at: CREATED_AT})
 
     # Notification
@@ -128,7 +129,7 @@ for sensor_id in 1..Sensor.count
     Notification.create({sensor_id:  sensor_id,
                          status:     status,
                          error:      '',
-                         ts_Data:    starting_date_as_ctr,
+                         ts_data:    starting_date_as_ctr,
                          created_at: CREATED_AT})
 
     previous_value = value

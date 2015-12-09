@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20151119004003) do
   create_table "notifications", force: :cascade do |t|
     t.integer  "status"
     t.string   "error"
-    t.string   "ts_Data"
+    t.string   "ts_data"
     t.integer  "sensor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20151119004003) do
 
   create_table "scadas", force: :cascade do |t|
     t.integer  "value"
-    t.string   "ts_Data"
+    t.string   "ts_data"
     t.integer  "sensor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

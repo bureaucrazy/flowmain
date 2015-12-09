@@ -6,7 +6,7 @@ The server has the following tables and columns:
 
 1. Sites
   - name
-  - long
+  - lon
   - lat
   - description
 2. Sensors
@@ -18,12 +18,12 @@ The server has the following tables and columns:
   - site_id
 3. Scadas
   - value
-  - ts_Data
+  - ts_data
   - sensor_id
 4. Notifications
   - status
   - error
-  - ts_Data
+  - ts_data
   - sensor_id
 
 The following paths are available:
@@ -43,7 +43,7 @@ sites: [
 {
 id: 1,
 name: "Lynn Creek",
-long: -123.0312098,
+lon: -123.0312098,
 lat: 49.3452601,
 description: null,
 url: "/api/v1/sites/1",
@@ -80,7 +80,7 @@ sensors: [
 scada: {
 id: 1,
 value: 386,
-ts_Data: "2015-11-18 11:52:27 -0800",
+ts_data: "2015-11-18 11:52:27 -0800",
 sensor_id: 1
 }
 }
@@ -92,7 +92,7 @@ sensor_id: 1
 notification: {
 id: 1,
 error: "",
-ts_Data: "2015-11-18 11:52:27 -0800",
+ts_data: "2015-11-18 11:52:27 -0800",
 sensor_id: 1
 }
 }

@@ -11,9 +11,13 @@ Rails.application.routes.draw do
      resources :scadas
      resources :notifications
 
-     get "/GetListPerSite/:id" => "sensors#get_list_per_site"
-     match "/SensorInfo/:id", to: "sensors#show", via: :get
-     match "/SensorStatus/:id", to: "notifications#sensor_status", via: :get
+     get "/GetListPerSite/:id" => "sites#get_list_per_site"
+     get "/GetListPerSensor/:id" => "sensors#get_list_per_sensor"
+     get "/GetSensorNameScadaValuesPerSite/:id" => "sites#get_sensor_names_and_scada_values_per_site"
+     get "/GetAllSensorNameScadaValues" => "sites#get_all_sensor_names_and_scada_values"
+     get "/SensorInfo/:id" => "sensors#show"
+     get "/SensorStatus/:id" => "notifications#sensor_status"
+     get "/AllSensorStatus" => "notifications#all_sensor_status"
    end
  end
   # The priority is based upon order of creation: first created -> highest priority.
